@@ -42,7 +42,7 @@ public class Direction : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         }
         else
         {
-            // Remover a direção da lista de números
+            // Remover a direï¿½ï¿½o da lista de nï¿½meros
             GameObject parentObject = transform.parent.gameObject;
             UIInventoryItem uIInventoryItem = parentObject.GetComponent<UIInventoryItem>();
             int index = uIInventoryItem.Index - 1;
