@@ -1,50 +1,54 @@
 using Inventory.UI;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Direction : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-
     [SerializeField] public Canvas canvas;
+    [SerializeField] public DirectionData directionData;
+
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
 
-    public int direction;
-
     public bool isAnchored;
-
     private GameManager gameManager;
     private GameObject clonedObject;
-
     private GameObject anchoredPlaceholder;
+    private GameObject animObject; 
+
+    public int direction;
 
     private void Awake()
     {
+        direction = directionData.directionValue;   
         isAnchored = false;
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         gameManager = FindObjectOfType<GameManager>();
-
+        animObject = GameObject.Find("Anim");
     }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (isAnchored == false)
+        if (animObject != null)
         {
-            clonedObject = GameObject.Instantiate(this.gameObject);
+            animObject.SetActive(false);
+        }
+
+        if (!isAnchored)
+        {
+            clonedObject = Instantiate(this.gameObject);
             clonedObject.transform.SetParent(GameObject.Find("InventoryContent").transform);
             clonedObject.GetComponent<RectTransform>().position = rectTransform.position;
             clonedObject.GetComponent<RectTransform>().rotation = rectTransform.rotation;
             clonedObject.GetComponent<RectTransform>().localScale = rectTransform.localScale;
+            clonedObject.name = this.gameObject.name;
         }
         else
         {
             GameObject parentObject = transform.parent.gameObject;
-
             UIInventoryItem uIInventoryItem = parentObject.GetComponent<UIInventoryItem>();
-            
             int index = uIInventoryItem.Index - 1;
             gameManager.Numeros.RemoveAt(index);
         }
@@ -63,8 +67,10 @@ public class Direction : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
 
-        if (isAnchored == false)
+        if (!isAnchored)
+        {
             clonedObject.name = this.gameObject.name;
+        }
 
         Destroy(this.gameObject);
     }

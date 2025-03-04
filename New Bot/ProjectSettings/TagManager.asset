@@ -4,10 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Up
-  - Right
-  - Plataform
-  - Left
   - Direction
   layers:
   - Default

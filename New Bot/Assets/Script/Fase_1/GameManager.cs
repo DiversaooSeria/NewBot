@@ -1,29 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 
-    public List<int> Numeros = new List<int>(); 
-    public PlayerCharacter player;
+    public List<int> Numeros = new List<int>();
+    public PlayerPhase1 player;
+    public GameObject animObject;
+    public GameObject tutorialPanelObj;
 
     private void Start()
     {
-        player = FindObjectOfType<PlayerCharacter>();
+        player = FindObjectOfType<PlayerPhase1>();
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        if (tutorialPanelObj != null)
+        {
+            tutorialPanelObj.SetActive(sceneName == "Fase 1");
+        }
+        if (animObject != null)
+        {
+            animObject.SetActive(false);
+        }
+
     }
 
     public void OnButtonClick()
     {
         player.StartCoroutine(Timer());
     }
-
-    IEnumerator Timer() 
+    public void OnTutorialExitClick()
     {
-        for (int i = 0; i < Numeros.Count; i++) 
-        {
-            Debug.Log("Iniciando");
+        tutorialPanelObj.SetActive(false);
+        animObject.SetActive(true); 
+    }
 
+
+    IEnumerator Timer()
+    {
+        for (int i = 0; i < Numeros.Count; i++)
+        {
             int x = Numeros[i];
             player.MoveCharacter(x);
 

@@ -17,7 +17,6 @@ public class FinishLine : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("check");
             winText.gameObject.SetActive(true);
             winText.text = "Você ganhou!";
 
