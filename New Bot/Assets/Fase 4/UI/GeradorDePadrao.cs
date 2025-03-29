@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using Inventory.UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using static MECRECGerenciador;
 
 public class GeradorDePadrao : MonoBehaviour
@@ -35,28 +36,67 @@ public class GeradorDePadrao : MonoBehaviour
         {
             GameObject uiItem = Instantiate(itemPrefab, contentPanel.gameObject.transform); // Define como filho do contentPanel
             RectTransform rectTransform = uiItem.GetComponent<RectTransform>();
-            uiItem.GetComponent<DropContainer>().index = i-1;
-            Debug.Log(i - 1);
-            // Ajuste da posição e escala corretamente para UI
-            rectTransform.anchoredPosition = new Vector2(x,y);
+            uiItem.GetComponent<DropContainer>().index = i - 1;
+
+            // Ajusta a posição e a escala corretamente para UI
+            rectTransform.anchoredPosition = new Vector2(x, y);
             rectTransform.localScale = Vector3.one;
 
-            //Selecionando qual deve ser a forma apresentada
-            if( Enum.IsDefined(typeof(Formas), gerente.sequenciaInicial[i-1]) && !(gerente.sequenciaInicial[i-1] == 4) )
+            // Selecionando qual deve ser a forma apresentada
+            if (Enum.IsDefined(typeof(Formas), gerente.sequenciaInicial[i - 1]) && gerente.sequenciaInicial[i - 1] != 4)
             {
                 string nomeForma = Enum.GetName(typeof(Formas), gerente.sequenciaInicial[i - 1]);
 
-                GameObject novaForma = Instantiate( gerente.EntregaForma(nomeForma), uiItem.gameObject.GetComponent<RectTransform>().anchoredPosition, Quaternion.identity);
+                GameObject prefabForma = gerente.EntregaForma(nomeForma);
+                if (prefabForma == null)
+                {
+                    Debug.LogWarning($"Forma '{nomeForma}' não encontrada em EntregaForma.");
+                    return;
+                }
 
-                novaForma.GetComponent<Itens>().parentBeforeDrag = uiItem.transform;
-                novaForma.GetComponent<Itens>().locked = true;                                     // Item não pode ser movido, está travado            
-                novaForma.gameObject.transform.SetParent(uiItem.gameObject.transform, false);
+                GameObject novaForma = Instantiate(prefabForma);
 
-                // Configurar a nova forma dentro do Canvas
+                // Define o novo pai na hierarquia
+                novaForma.transform.SetParent(uiItem.transform, false);
+
+                // Configuração de UI para garantir posicionamento correto
                 RectTransform novaFormaRect = novaForma.GetComponent<RectTransform>();
-                novaFormaRect.SetParent(uiItem.transform.transform.parent, false);
-                uiItem.GetComponent<DropContainer>().isAchorned = true;                             // Container está alocado
+                if (novaFormaRect != null)
+                {
+                    novaFormaRect.anchoredPosition = Vector2.zero; // Centraliza dentro do uiItem
+                    novaFormaRect.localScale = Vector3.one;       // Garante que a escala fique correta
+                    novaForma.transform.SetAsLastSibling();       // Mantém a ordem correta na UI
+                }
+                else
+                {
+                    Debug.LogWarning("Nova forma não possui RectTransform.");
+                }
+
+                // Configuração do comportamento da forma
+                Itens itemScript = novaForma.GetComponent<Itens>();
+                if (itemScript != null)
+                {
+                    itemScript.parentBeforeDrag = uiItem.transform;
+                    itemScript.locked = true; // O item não pode ser movido
+                }
+                else
+                {
+                    Debug.LogWarning("Nova forma não possui componente 'Itens'.");
+                }
+
+                // Marca o DropContainer como ocupado
+                DropContainer dropContainer = uiItem.GetComponent<DropContainer>();
+                if (dropContainer != null)
+                {
+                    dropContainer.isAnchored = true;
+                }
+                else
+                {
+                    Debug.LogWarning("uiItem não possui componente 'DropContainer'.");
+                }
             }
+
+
 
             listOfUItems.Add(uiItem);
             x += 180;

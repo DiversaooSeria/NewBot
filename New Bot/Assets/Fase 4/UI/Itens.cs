@@ -37,7 +37,8 @@ public class Itens : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (rectTransform == null || canvas == null || locked ) return;
+        if (locked) return;
+        if (rectTransform == null || canvas == null  ) return;
         // Converte a posição do mouse para coordenadas locais do Canvas
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
@@ -51,13 +52,14 @@ public class Itens : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
     public void OnEndDrag(PointerEventData eventData)
     {
         if(locked) return;
+
         canvasGroup.blocksRaycasts = true; // Permite que o item seja detectado novamente
         canvasGroup.alpha = 1f;            // Restaura a opacidade
 
         // Tenta detectar um DropContainer válido
         GameObject dropTarget = GetDropTarget(eventData);
         
-        if (dropTarget != null && dropTarget.CompareTag("DropContainer"))
+        if (dropTarget != null  )
         {
             transform.SetParent(dropTarget.transform, false); // Define o container como novo pai
 
@@ -88,7 +90,7 @@ public class Itens : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 
         foreach (RaycastResult result in results)
         {
-            if (result.gameObject.CompareTag("DropContainer") && !result.gameObject.GetComponent<DropContainer>().isAchorned)
+            if ( result.gameObject.CompareTag("DropContainer") )
             {
                 return result.gameObject;
             }
