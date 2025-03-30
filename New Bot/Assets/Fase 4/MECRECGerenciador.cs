@@ -11,11 +11,13 @@ public class MECRECGerenciador : ScriptableObject
 
     [SerializeField] public List<int> sequenciaCorreta = new List<int>();
     [SerializeField] public List<int> sequenciaInicial = new List<int>();
-    [SerializeField] public List<int> sequenciaPlayer = new List<int>();
+    [SerializeField] public List<int> sequenciaPlayer;
 
     public UnityEvent naAreaDeInteracao;
     public UnityEvent saiuAreaDeInteracao;
     public UnityEvent interagiu;
+
+    public event Action<int, int> changeInContainer;
 
     
     //public event Action<GameObject> SendForma;
@@ -36,6 +38,8 @@ public class MECRECGerenciador : ScriptableObject
     public void DispararSaiuAreaDeInteracao() => saiuAreaDeInteracao?.Invoke();
     public void DispararInteragiu() => interagiu?.Invoke();
 
+    public void DispararMudancaNoContainer(int a, int b) => changeInContainer?.Invoke(a,b);
+
     
 
     public GameObject EntregaForma(String forma)
@@ -49,6 +53,22 @@ public class MECRECGerenciador : ScriptableObject
     }
     
 
+    public int ConverteFormaInteiro(GameObject item)
+    {
+        return (int)item.GetComponent<Itens>().forma ;
+    }
 
+    public void Ok()
+    {
+        for(int i = 0;i < sequenciaCorreta.Count;i++)
+        {
+            if (sequenciaCorreta[i] != sequenciaPlayer[i])
+            {
+                Debug.Log("Errou!");
+                return;
+            }
+        }
+        Debug.Log("Sucesso");
 
+    }
 }

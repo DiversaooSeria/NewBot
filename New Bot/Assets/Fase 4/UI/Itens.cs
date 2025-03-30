@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,7 +13,8 @@ public class Itens : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
     private Canvas canvas;
     public Vector2 posicaoInicial; // posição para ele voltar caso o Container esteja invalido
     public bool locked = false; // Trava do item para ele ficar "paralisado"
-   
+
+    [SerializeField] public MECRECGerenciador.Formas forma;
 
     public void Start()
     {
@@ -29,6 +31,11 @@ public class Itens : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
         if (canvas == null || canvasGroup == null)
         {
             Start();
+        }
+        if( this.transform.parent.CompareTag("DropContainer"))
+        {
+            this.transform.parent.GetComponent<DropContainer>().isAnchored = false;
+            this.transform.parent.GetComponent<DropContainer>().ChangeArchoned(); // isAnchorned is false, value = 4: void
         }
         transform.SetParent(canvas.transform, true); // Mantém a hierarquia correta
         canvasGroup.blocksRaycasts = false; // Permite que containers detectem o drop
@@ -59,7 +66,7 @@ public class Itens : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
         // Tenta detectar um DropContainer válido
         GameObject dropTarget = GetDropTarget(eventData);
         
-        if (dropTarget != null  )
+        if ( dropTarget != null && !dropTarget.GetComponent<DropContainer>().isAnchored )
         {
             transform.SetParent(dropTarget.transform, false); // Define o container como novo pai
 
@@ -70,6 +77,7 @@ public class Itens : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
             );
 
             rectTransform.anchoredPosition = localPoint;
+            dropTarget.GetComponent<DropContainer>().OnDrop(this.gameObject);
         }
         else
         {
@@ -102,7 +110,19 @@ public class Itens : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
     {
         if (eventData != null && eventData.clickCount == 2 && !locked) // para deletar caso clique duas vezes
         {
+            Transform container = this.transform.parent; // Obtém o pai do item na hierarquia
+
+            if (container != null)
+            {
+                Debug.Log("Foi");
+                DropContainer dropContainer = container.GetComponent<DropContainer>();
+                if (dropContainer != null)
+                {
+                    dropContainer.isAnchored = false; // Marca o container como vazio
+                }
+            }
             Destroy(this.gameObject);
+
         }
 
     }

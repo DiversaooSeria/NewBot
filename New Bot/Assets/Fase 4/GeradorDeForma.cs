@@ -13,12 +13,7 @@ public class GeradorDeForma : MonoBehaviour, IPointerClickHandler
     [SerializeField] public MECRECGerenciador.Formas forma;
 
     public GameObject objForma;
-    public enum Forma
-    {
-        Triangulo,
-        Quadrado,
-        Circulo
-    }
+    
 
     private void OnEnable()
     {

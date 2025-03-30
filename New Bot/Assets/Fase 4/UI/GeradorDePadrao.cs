@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using Inventory.UI;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static MECRECGerenciador;
@@ -25,7 +26,9 @@ public class GeradorDePadrao : MonoBehaviour
     {
         contentPanel = GetComponent<RectTransform>();
         itemPrefab = gerente.container;
+        PreencheSequenciaPlayer();
         InitializeInventoryUI(quantidade);
+        
     }
 
    
@@ -55,7 +58,7 @@ public class GeradorDePadrao : MonoBehaviour
                 }
 
                 GameObject novaForma = Instantiate(prefabForma);
-
+                uiItem.GetComponent<DropContainer>().OnDrop(novaForma);
                 // Define o novo pai na hierarquia
                 novaForma.transform.SetParent(uiItem.transform, false);
 
@@ -86,13 +89,14 @@ public class GeradorDePadrao : MonoBehaviour
 
                 // Marca o DropContainer como ocupado
                 DropContainer dropContainer = uiItem.GetComponent<DropContainer>();
-                if (dropContainer != null)
+                if (dropContainer == null)
                 {
-                    dropContainer.isAnchored = true;
+                    Debug.LogWarning("uiItem não possui componente 'DropContainer'.");
                 }
                 else
                 {
-                    Debug.LogWarning("uiItem não possui componente 'DropContainer'.");
+                    
+                 
                 }
             }
 
@@ -110,5 +114,9 @@ public class GeradorDePadrao : MonoBehaviour
         }
     }
 
+    public void PreencheSequenciaPlayer()
+    {
+        gerente.sequenciaPlayer = new List<int>(new int[quantidade-1]); // preenche com valores nulos 
+    }
     
 }
