@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Fase 4.unity
     guid: 047ba2dc934333645a9bcd9192dc1d62
+  - enabled: 1
+    path: Assets/Scenes/Metro.unity
+    guid: cbfdf7e55f4d79c438f11b7c458a5e4d
   m_configObjects: {}
