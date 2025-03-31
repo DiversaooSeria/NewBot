@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ContainerGerador : MonoBehaviour, ContainerInterface
+public class ContainerGerador : MonoBehaviour
 {
     
     public void OnDrop(PointerEventData eventData)

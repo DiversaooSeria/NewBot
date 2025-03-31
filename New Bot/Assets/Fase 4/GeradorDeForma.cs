@@ -6,15 +6,19 @@ using UnityEngine.EventSystems;
 
 public class GeradorDeForma : MonoBehaviour, IPointerClickHandler
 {
-    public MECRECGerenciador gerente;
+    public MECREC mecrec;
+   
     RectTransform rectTransform;
     //public event Action<String> requestForma;
 
     [SerializeField] public MECRECGerenciador.Formas forma;
 
     public GameObject objForma;
-    
 
+    public void Awake()
+    {
+        mecrec = FindMecrec(this.transform).GetComponent<MECREC>();
+    }
     private void OnEnable()
     {
         
@@ -27,7 +31,7 @@ public class GeradorDeForma : MonoBehaviour, IPointerClickHandler
 
     void Start()
     {
-        SetForma( gerente.EntregaForma( forma.ToString() ) );
+        SetForma( mecrec.gerente.EntregaForma( forma.ToString() ) );
         rectTransform = GetComponent<RectTransform>();
     }
 
@@ -56,4 +60,15 @@ public class GeradorDeForma : MonoBehaviour, IPointerClickHandler
         objForma = obj;
     }
 
+    public GameObject FindMecrec(Transform current)
+    {
+        if (current == null) return null;
+
+        if (current.CompareTag("MECREC"))
+        {
+            return current.gameObject;
+        }
+
+        return FindMecrec(current.parent); // Chama recursivamente para o próximo pai
+    }
 }

@@ -10,6 +10,7 @@ TagManager:
   - Left
   - Direction
   - DropContainer
+  - MECREC
   layers:
   - Default
   - TransparentFX

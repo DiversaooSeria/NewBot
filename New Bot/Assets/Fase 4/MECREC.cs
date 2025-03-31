@@ -8,7 +8,11 @@ public class MECREC : MonoBehaviour
     public MECRECGerenciador gerente;
     public Transform AreaDeInteracao, Menu;
 
-    
+    private void Awake()
+    {
+        AreaDeInteracao = FindDeepChild(transform, "Botao de interacao");
+        Menu = FindDeepChild(transform, "Menu Rec");
+    }
     private void OnEnable()
     {
         // Eventos para detecção de aproximação do player
@@ -30,8 +34,7 @@ public class MECREC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AreaDeInteracao = FindDeepChild(transform, "Botao de interacao");
-        Menu = FindDeepChild(transform, "Menu Rec");
+        
     }
 
     
@@ -58,7 +61,15 @@ public class MECREC : MonoBehaviour
         gerente.sequenciaPlayer[index] = valor;
     }
     
+    public void BotaoSair()
+    {
+        Menu.gameObject.SetActive(false);
+    }
 
+    public void BotaoOK()
+    {
+        gerente.Ok();
+    }
     //Função para encontrar os filhos de MECREC que é um encapsulador.(Filhos são os outros gameObject dentro de MECREC)
     Transform FindDeepChild(Transform parent, string name)
     {
@@ -73,4 +84,6 @@ public class MECREC : MonoBehaviour
         }
         return null;
     }
+
+    
 }

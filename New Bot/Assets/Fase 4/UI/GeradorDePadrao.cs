@@ -18,14 +18,18 @@ public class GeradorDePadrao : MonoBehaviour
     public int quantidade, quebra;
     public float x = -180, y = 124;
 
-    public MECRECGerenciador gerente; // para requisições do ScriptableObject
+    public MECREC mecrec; // para requisições do ScriptableObject
 
 
+    public void Awake()
+    {
+        mecrec = FindMecrec(this.transform).GetComponent<MECREC>();
+    }
     // Start is called before the first frame update
     void Start()
     {
         contentPanel = GetComponent<RectTransform>();
-        itemPrefab = gerente.container;
+        itemPrefab = mecrec.gerente.container;
         PreencheSequenciaPlayer();
         InitializeInventoryUI(quantidade);
         
@@ -40,17 +44,18 @@ public class GeradorDePadrao : MonoBehaviour
             GameObject uiItem = Instantiate(itemPrefab, contentPanel.gameObject.transform); // Define como filho do contentPanel
             RectTransform rectTransform = uiItem.GetComponent<RectTransform>();
             uiItem.GetComponent<DropContainer>().index = i - 1;
+            uiItem.GetComponent<DropContainer>().mecrec = mecrec;
 
             // Ajusta a posição e a escala corretamente para UI
             rectTransform.anchoredPosition = new Vector2(x, y);
             rectTransform.localScale = Vector3.one;
 
             // Selecionando qual deve ser a forma apresentada
-            if (Enum.IsDefined(typeof(Formas), gerente.sequenciaInicial[i - 1]) && gerente.sequenciaInicial[i - 1] != 4)
+            if (Enum.IsDefined(typeof(Formas), mecrec.gerente.sequenciaInicial[i - 1]) && mecrec.gerente.sequenciaInicial[i - 1] != 4)
             {
-                string nomeForma = Enum.GetName(typeof(Formas), gerente.sequenciaInicial[i - 1]);
+                string nomeForma = Enum.GetName(typeof(Formas), mecrec.gerente.sequenciaInicial[i - 1]);
 
-                GameObject prefabForma = gerente.EntregaForma(nomeForma);
+                GameObject prefabForma = mecrec.gerente.EntregaForma(nomeForma);
                 if (prefabForma == null)
                 {
                     Debug.LogWarning($"Forma '{nomeForma}' não encontrada em EntregaForma.");
@@ -116,7 +121,19 @@ public class GeradorDePadrao : MonoBehaviour
 
     public void PreencheSequenciaPlayer()
     {
-        gerente.sequenciaPlayer = new List<int>(new int[quantidade-1]); // preenche com valores nulos 
+        mecrec.gerente.sequenciaPlayer = new List<int>(new int[quantidade-1]); // preenche com valores nulos 
     }
-    
+
+    public GameObject FindMecrec(Transform current)
+    {
+        if (current == null) return null;
+
+        if (current.CompareTag("MECREC"))
+        {
+            return current.gameObject;
+        }
+
+        return FindMecrec(current.parent); // Chama recursivamente para o próximo pai
+    }
+
 }
