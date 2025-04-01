@@ -15,7 +15,7 @@ public class MECRECGerenciador : ScriptableObject
 
     public UnityEvent naAreaDeInteracao;
     public UnityEvent saiuAreaDeInteracao;
-    public UnityEvent interagiu;
+    public UnityEvent interagiu, finalizado;
 
     public event Action<int, int> changeInContainer;
 
@@ -69,6 +69,6 @@ public class MECRECGerenciador : ScriptableObject
             }
         }
         Debug.Log("Sucesso");
-
+        finalizado?.Invoke();
     }
 }
