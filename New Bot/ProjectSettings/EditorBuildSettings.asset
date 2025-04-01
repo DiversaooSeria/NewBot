@@ -6,22 +6,22 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Main.unity
+    path: Assets/Scenes/Menu/Main.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Fase 1.unity
+    path: Assets/Scenes/Algoritmo/Fase1_Algo.unity
     guid: 4e7749cb9927f204f94aafd3179c5a0f
   - enabled: 1
-    path: Assets/Scenes/Fase 2.unity
+    path: "Assets/Scenes/Abstra\xE7\xE3o/Fase1_Abs.unity"
     guid: b29b9eeb22348b446b80d1c892b141c9
   - enabled: 1
-    path: Assets/Scenes/Fase 3.unity
+    path: "Assets/Scenes/Decomposi\xE7\xE3o/Fase1_Deco.unity"
     guid: c77e8ecb3e74c9a498996f46433b2d3d
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
+    path: Assets/Scenes/Menu/Menu.unity
     guid: ad32202d766e459458ce3c6b81f4fc4e
   - enabled: 1
-    path: Assets/Scenes/Fase 4.unity
+    path: Assets/Scenes/Algoritmo/Fase2_Algo.unity
     guid: 047ba2dc934333645a9bcd9192dc1d62
   - enabled: 1
     path: Assets/Scenes/Metro.unity
