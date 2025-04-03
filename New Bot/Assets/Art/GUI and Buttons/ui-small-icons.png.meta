@@ -1,7 +1,19 @@
 fileFormatVersion: 2
-guid: 84873522082196348b931e3f46de09e9
+guid: cd7dd0d7221d4294ab551bac2dfe7c1f
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -5390123095117124330
+    second: ui-small-icons_0
+  - first:
+      213: -8880520576215733831
+    second: ui-small-icons_1
+  - first:
+      213: -3983950619504736678
+    second: ui-small-icons_2
+  - first:
+      213: -9176472066801411641
+    second: ui-small-icons_3
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -48,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 1
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -69,7 +81,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -82,10 +94,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ui-panels_0
+      name: ui-small-icons_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
-        width: 32
-        height: 32
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +123,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d39e862cd1c03824ba933f4b7a7beed9
-      internalID: -1141995084
+      spriteID: 61d2ae36a9f6235b0800000000000000
+      internalID: -5390123095117124330
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui-panels_1
+      name: ui-small-icons_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 32
-        width: 32
-        height: 32
+        x: 16
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,41 +144,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 268efded26fe56442982d3c584c9ea94
-      internalID: 1190495338
+      spriteID: 9b92d12469d02c480800000000000000
+      internalID: -8880520576215733831
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui-panels_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9ee08f377ac5b6b43906c1b1370f07cd
-      internalID: -1671526666
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ui-panels_3
+      name: ui-small-icons_2
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +165,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f90eb121c39010f4196379067c6dbdd2
-      internalID: 456879501
+      spriteID: a5609b9f40a26b8c0800000000000000
+      internalID: -3983950619504736678
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui-panels_4
+      name: ui-small-icons_3
       rect:
         serializedVersion: 2
-        x: 32
+        x: 16
         y: 0
-        width: 32
-        height: 32
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,29 +186,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3bdd624ef3360b409de1bcd7a68bd1e
-      internalID: 870079496
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ui-panels_5
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 34a14898295e5844c9a9acbafe5525ab
-      internalID: 1226767206
+      spriteID: 7c9d107364f96a080800000000000000
+      internalID: -9176472066801411641
       vertices: []
       indices: 
       edges: []
@@ -233,12 +203,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ui-panels_0: -1141995084
-      ui-panels_1: 1190495338
-      ui-panels_2: -1671526666
-      ui-panels_3: 456879501
-      ui-panels_4: 870079496
-      ui-panels_5: 1226767206
+      ui-small-icons_0: -5390123095117124330
+      ui-small-icons_1: -8880520576215733831
+      ui-small-icons_2: -3983950619504736678
+      ui-small-icons_3: -9176472066801411641
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
