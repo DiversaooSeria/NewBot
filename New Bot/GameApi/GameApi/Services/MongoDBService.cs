@@ -7,7 +7,7 @@ namespace GameApi.Services
 {
     public class MongoDBService
     {
-        private readonly IMongoCollection<Button> _collection;
+        private readonly IMongoCollection<ButtonClickRequest> _collection;
 
         public MongoDBService(IOptions<MongoDBSettings> settings)
         {
@@ -16,7 +16,7 @@ namespace GameApi.Services
 
             var client = new MongoClient(clientSettings);
             var database = client.GetDatabase(settings.Value.DatabaseName);
-            _collection = database.GetCollection<Button>(settings.Value.CollectionName);
+            _collection = database.GetCollection<ButtonClickRequest>(settings.Value.CollectionName);
 
             VerifyConnection(client);
         }
@@ -35,9 +35,13 @@ namespace GameApi.Services
             }
         }
 
-        public async Task SaveButtonClick(Button click)
+        public async Task SaveButtonClick(ButtonClickRequest clickRequest)
         {
-            await _collection.InsertOneAsync(click);
+            // Adiciona metadados automáticos
+            clickRequest.Metadata["receivedAt"] = DateTime.UtcNow.ToString("o");
+            clickRequest.Metadata["source"] = "UnityGame";
+
+            await _collection.InsertOneAsync(clickRequest);
         }
     }
 }
