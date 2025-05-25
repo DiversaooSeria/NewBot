@@ -61,10 +61,5 @@ namespace Inventory.UI
                 gameManager.Numeros[index] = directionValue;
             }
         }
-
-        public void OnClick(PointerEventData eventData)
-        {
-            Debug.Log("Click");
-        }
     }
 }
