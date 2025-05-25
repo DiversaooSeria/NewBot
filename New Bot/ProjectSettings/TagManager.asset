@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Direction
+  - DropContainer
+  - MECREC
   layers:
   - Default
   - TransparentFX
