@@ -6,18 +6,18 @@ using UnityEngine.EventSystems;
 
 public class GeradorDeForma : MonoBehaviour, IPointerClickHandler
 {
-    public MECREC mecrec;
+    public MecanicaReconhecimentoPadrao mecrec;
    
     RectTransform rectTransform;
     //public event Action<String> requestForma;
 
-    [SerializeField] public MECRECGerenciador.Formas forma;
+    [SerializeField] public MecanicaController.Formas forma;
 
     public GameObject objForma;
 
     public void Awake()
     {
-        mecrec = FindMecrec(this.transform).GetComponent<MECREC>();
+        mecrec = FindController(this.transform, "MECREC").GetComponent<MecanicaReconhecimentoPadrao>();
     }
     private void OnEnable()
     {
@@ -35,7 +35,6 @@ public class GeradorDeForma : MonoBehaviour, IPointerClickHandler
         rectTransform = GetComponent<RectTransform>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -44,13 +43,11 @@ public class GeradorDeForma : MonoBehaviour, IPointerClickHandler
     {
         if (objForma == null) return;
 
-        // Criar a nova instância
         GameObject novaForma = Instantiate( objForma , this.rectTransform.anchoredPosition, Quaternion.identity);
         
         novaForma.GetComponent<Itens>().parentBeforeDrag = transform;
         novaForma.transform.SetParent(transform, false);   
 
-        // Configurar a nova forma dentro do Canvas
         RectTransform novaFormaRect = novaForma.GetComponent<RectTransform>();
         novaFormaRect.SetParent(this.transform.parent, false);
     }
@@ -60,15 +57,15 @@ public class GeradorDeForma : MonoBehaviour, IPointerClickHandler
         objForma = obj;
     }
 
-    public GameObject FindMecrec(Transform current)
+    public GameObject FindController(Transform current, string tag)
     {
         if (current == null) return null;
 
-        if (current.CompareTag("MECREC"))
+        if (current.CompareTag(tag))
         {
             return current.gameObject;
         }
 
-        return FindMecrec(current.parent); // Chama recursivamente para o próximo pai
+        return FindController(current.parent, tag); 
     }
 }

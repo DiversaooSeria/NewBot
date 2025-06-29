@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class Turbina : MonoBehaviour
 {
-    public MECREC mecrec;
-    
-   
+    public MecanicaReconhecimentoPadrao mecrec;
     
     private void OnEnable()
     {
-        mecrec.gerente.finalizado.AddListener(finalizado);
+        mecrec.gerente.finalizado.AddListener(Finalizado);
     }
     private void OnDisable()
     {
-        mecrec.gerente.finalizado.RemoveListener(finalizado);
+        mecrec.gerente.finalizado.RemoveListener(Finalizado);
     }
 
     
-    private void finalizado()
+    private void Finalizado()
     {
         GetComponent<Animator>().SetBool("Ativado", true);
     }

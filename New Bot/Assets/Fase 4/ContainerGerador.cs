@@ -8,11 +8,11 @@ public class ContainerGerador : MonoBehaviour
     
     public void OnDrop(PointerEventData eventData)
     {
-        GameObject droppedObject = eventData.pointerDrag; // Pega o objeto que está sendo arrastado
+        GameObject droppedObject = eventData.pointerDrag; 
         if (droppedObject != null && droppedObject.GetComponent<Itens>() != null)
         {
-            droppedObject.transform.SetParent(transform); // Define como filho do container
-            droppedObject.transform.localPosition = Vector3.zero; // Centraliza dentro do container
+            droppedObject.transform.SetParent(transform); 
+            droppedObject.transform.localPosition = Vector3.zero; 
 
         }
     }
