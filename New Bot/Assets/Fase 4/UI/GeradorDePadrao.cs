@@ -6,7 +6,7 @@ using Inventory.UI;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static MECRECGerenciador;
+using static MecanicaController;
 
 public class GeradorDePadrao : MonoBehaviour
 {
@@ -18,12 +18,12 @@ public class GeradorDePadrao : MonoBehaviour
     public int quantidade, quebra;
     public float x = -180, y = 124;
 
-    public MECREC mecrec; // para requisições do ScriptableObject
+    public MecanicaReconhecimentoPadrao mecrec; 
 
 
     public void Awake()
     {
-        mecrec = FindMecrec(this.transform).GetComponent<MECREC>();
+        mecrec = FindMecrec(this.transform).GetComponent<MecanicaReconhecimentoPadrao>();
     }
     // Start is called before the first frame update
     void Start()
@@ -46,7 +46,7 @@ public class GeradorDePadrao : MonoBehaviour
             uiItem.GetComponent<DropContainer>().index = i - 1;
             uiItem.GetComponent<DropContainer>().mecrec = mecrec;
 
-            // Ajusta a posição e a escala corretamente para UI
+            // Ajusta a posiï¿½ï¿½o e a escala corretamente para UI
             rectTransform.anchoredPosition = new Vector2(x, y);
             rectTransform.localScale = Vector3.one;
 
@@ -58,7 +58,7 @@ public class GeradorDePadrao : MonoBehaviour
                 GameObject prefabForma = mecrec.gerente.EntregaForma(nomeForma);
                 if (prefabForma == null)
                 {
-                    Debug.LogWarning($"Forma '{nomeForma}' não encontrada em EntregaForma.");
+                    Debug.LogWarning($"Forma '{nomeForma}' nï¿½o encontrada em EntregaForma.");
                     return;
                 }
 
@@ -67,36 +67,36 @@ public class GeradorDePadrao : MonoBehaviour
                 // Define o novo pai na hierarquia
                 novaForma.transform.SetParent(uiItem.transform, false);
 
-                // Configuração de UI para garantir posicionamento correto
+                // Configuraï¿½ï¿½o de UI para garantir posicionamento correto
                 RectTransform novaFormaRect = novaForma.GetComponent<RectTransform>();
                 if (novaFormaRect != null)
                 {
                     novaFormaRect.anchoredPosition = Vector2.zero; // Centraliza dentro do uiItem
                     novaFormaRect.localScale = Vector3.one;       // Garante que a escala fique correta
-                    novaForma.transform.SetAsLastSibling();       // Mantém a ordem correta na UI
+                    novaForma.transform.SetAsLastSibling();       // Mantï¿½m a ordem correta na UI
                 }
                 else
                 {
-                    Debug.LogWarning("Nova forma não possui RectTransform.");
+                    Debug.LogWarning("Nova forma nï¿½o possui RectTransform.");
                 }
 
-                // Configuração do comportamento da forma
+                // Configuraï¿½ï¿½o do comportamento da forma
                 Itens itemScript = novaForma.GetComponent<Itens>();
                 if (itemScript != null)
                 {
                     itemScript.parentBeforeDrag = uiItem.transform;
-                    itemScript.locked = true; // O item não pode ser movido
+                    itemScript.locked = true; // O item nï¿½o pode ser movido
                 }
                 else
                 {
-                    Debug.LogWarning("Nova forma não possui componente 'Itens'.");
+                    Debug.LogWarning("Nova forma nï¿½o possui componente 'Itens'.");
                 }
 
                 // Marca o DropContainer como ocupado
                 DropContainer dropContainer = uiItem.GetComponent<DropContainer>();
                 if (dropContainer == null)
                 {
-                    Debug.LogWarning("uiItem não possui componente 'DropContainer'.");
+                    Debug.LogWarning("uiItem nï¿½o possui componente 'DropContainer'.");
                 }
                 else
                 {
@@ -133,7 +133,7 @@ public class GeradorDePadrao : MonoBehaviour
             return current.gameObject;
         }
 
-        return FindMecrec(current.parent); // Chama recursivamente para o próximo pai
+        return FindMecrec(current.parent); // Chama recursivamente para o prï¿½ximo pai
     }
 
 }

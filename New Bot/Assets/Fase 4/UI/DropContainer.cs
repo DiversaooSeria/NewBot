@@ -5,18 +5,18 @@ using UnityEngine.EventSystems;
 
 public class DropContainer : MonoBehaviour
 {
-    public MECREC mecrec;
+    public MecanicaReconhecimentoPadrao mecrec;
 
-    public int index;   // posicao/indice do container
+    public int index;  
     public bool isAnchored = false; // esta preenchido
 
     public void Awake()
     {
-        mecrec = FindMecrec(this.transform).GetComponent<MECREC>();
+        mecrec = FindMecrec(this.transform).GetComponent<MecanicaReconhecimentoPadrao>();
     }
     public void OnDrop(GameObject item)
     {
-        if ( isAnchored == true ) return;        //Se está prenchido nada acontece
+        if ( isAnchored == true ) return;   
              
         if ( item != null )
         {
@@ -43,7 +43,7 @@ public class DropContainer : MonoBehaviour
             return current.gameObject;
         }
 
-        return FindMecrec(current.parent); // Chama recursivamente para o próximo pai
+        return FindMecrec(current.parent); // Chama recursivamente para o prï¿½ximo pai
     }
 
 

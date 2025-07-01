@@ -8668,7 +8668,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6.3097935
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -21178,15 +21178,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6802607743284191840, guid: be91f26b12769c54982abe53acbe2870, type: 3}
       propertyPath: m_SortingLayer
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6802607743284191840, guid: be91f26b12769c54982abe53acbe2870, type: 3}
       propertyPath: m_SortingOrder
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6802607743284191840, guid: be91f26b12769c54982abe53acbe2870, type: 3}
       propertyPath: m_SortingLayerID
-      value: -600134465
+      value: 610963701
       objectReference: {fileID: 0}
     - target: {fileID: 7500956828935083418, guid: be91f26b12769c54982abe53acbe2870, type: 3}
       propertyPath: m_Name
@@ -21308,6 +21308,10 @@ PrefabInstance:
       propertyPath: mecrec
       value: 
       objectReference: {fileID: 1605295330}
+    - target: {fileID: 5133997999034170465, guid: 21324ff0755391042b1add199baddfdf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6130296320366564017, guid: 21324ff0755391042b1add199baddfdf, type: 3}
       propertyPath: m_Camera
       value: 
@@ -21320,6 +21324,10 @@ PrefabInstance:
       propertyPath: mecrec
       value: 
       objectReference: {fileID: 1605295330}
+    - target: {fileID: 9053301703755799435, guid: 21324ff0755391042b1add199baddfdf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9198626821806224551, guid: 21324ff0755391042b1add199baddfdf, type: 3}
       propertyPath: mecrec
       value: 

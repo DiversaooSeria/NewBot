@@ -7,11 +7,11 @@ public class InteracaoPLayer : MonoBehaviour
 {
     //public event Action PressE;
 
-    public MECREC mecrec;
+    public MecanicaReconhecimentoPadrao mecrec;
 
     private void Start()
     {
-        mecrec = FindMecrec(this.transform).GetComponent<MECREC>();
+        mecrec = FindMecrec(this.transform).GetComponent<MecanicaReconhecimentoPadrao>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -49,7 +49,7 @@ public class InteracaoPLayer : MonoBehaviour
             return current.gameObject;
         }
 
-        return FindMecrec(current.parent); // Chama recursivamente para o próximo pai
+        return FindMecrec(current.parent); // Chama recursivamente para o prï¿½ximo pai
     }
 
 }

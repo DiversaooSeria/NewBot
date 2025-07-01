@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Porta : MonoBehaviour
 {
-    public MECREC mecrec;
+    public MecanicaReconhecimentoPadrao mecrec;
 
     private void OnEnable()
     {
