@@ -11,16 +11,16 @@ public class Itens : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private RectTransform rectTransform;
     private Canvas canvas;
-    public Vector2 posicaoInicial; // posição para ele voltar caso o Container esteja invalido
+    public Vector2 posicaoInicial; // posiï¿½ï¿½o para ele voltar caso o Container esteja invalido
     public bool locked = false; // Trava do item para ele ficar "paralisado"
 
-    [SerializeField] public MECRECGerenciador.Formas forma;
+    [SerializeField] public MecanicaController.Formas forma;
 
     public void Start()
     {
         canvasGroup = GetComponent<CanvasGroup>();
         rectTransform = GetComponent<RectTransform>();
-        canvas = GetComponentInParent<Canvas>();        // Obtém o Canvas automaticamente
+        canvas = GetComponentInParent<Canvas>();        // Obtï¿½m o Canvas automaticamente
         posicaoInicial = Vector2.zero;
         
     }
@@ -37,7 +37,7 @@ public class Itens : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
             this.transform.parent.GetComponent<DropContainer>().isAnchored = false;
             this.transform.parent.GetComponent<DropContainer>().ChangeArchoned(); // isAnchorned is false, value = 4: void
         }
-        transform.SetParent(canvas.transform, true); // Mantém a hierarquia correta
+        transform.SetParent(canvas.transform, true); // Mantï¿½m a hierarquia correta
         canvasGroup.blocksRaycasts = false; // Permite que containers detectem o drop
         canvasGroup.alpha = 0.5f; // Deixa a imagem semi-transparente
     }
@@ -46,7 +46,7 @@ public class Itens : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
     {
         if (locked) return;
         if (rectTransform == null || canvas == null  ) return;
-        // Converte a posição do mouse para coordenadas locais do Canvas
+        // Converte a posiï¿½ï¿½o do mouse para coordenadas locais do Canvas
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvas.transform as RectTransform, eventData.position, eventData.pressEventCamera, out localPoint
@@ -63,14 +63,14 @@ public class Itens : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
         canvasGroup.blocksRaycasts = true; // Permite que o item seja detectado novamente
         canvasGroup.alpha = 1f;            // Restaura a opacidade
 
-        // Tenta detectar um DropContainer válido
+        // Tenta detectar um DropContainer vï¿½lido
         GameObject dropTarget = GetDropTarget(eventData);
         
         if ( dropTarget != null && !dropTarget.GetComponent<DropContainer>().isAnchored )
         {
             transform.SetParent(dropTarget.transform, false); // Define o container como novo pai
 
-            // Converte a posição do mouse para o espaço local do novo container
+            // Converte a posiï¿½ï¿½o do mouse para o espaï¿½o local do novo container
             Vector2 localPoint;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 dropTarget.transform as RectTransform, eventData.position, eventData.pressEventCamera, out localPoint
@@ -110,7 +110,7 @@ public class Itens : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
     {
         if (eventData != null && eventData.clickCount == 2 && !locked) // para deletar caso clique duas vezes
         {
-            Transform container = this.transform.parent; // Obtém o pai do item na hierarquia
+            Transform container = this.transform.parent; // Obtï¿½m o pai do item na hierarquia
 
             if (container != null)
             {
