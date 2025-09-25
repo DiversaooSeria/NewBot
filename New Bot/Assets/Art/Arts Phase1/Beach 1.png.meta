@@ -65,7 +65,11 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
+<<<<<<<< HEAD:New Bot/Assets/Art/Arts Phase1/Beach 1.png.meta
   cookieLightType: 0
+========
+  cookieLightType: 1
+>>>>>>>> 823ee93d41d98ba17a46ab878e403e32eca74270:New Bot/Assets/Art/GUI and Buttons/GUI/GUI_2x.png.meta
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
