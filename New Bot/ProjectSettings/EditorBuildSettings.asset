@@ -5,22 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Menu/OpenWorld.unity
+  - enabled: 0
+    path: Assets/Scenes/Menu/Main.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Algoritmo/Fase1_Algo.unity
     guid: 4e7749cb9927f204f94aafd3179c5a0f
   - enabled: 1
+    path: "Assets/Scenes/Abstra\xE7\xE3o/Fase1_Abs.unity"
+    guid: b29b9eeb22348b446b80d1c892b141c9
+  - enabled: 1
+    path: "Assets/Scenes/Decomposi\xE7\xE3o/Fase1_Deco.unity"
+    guid: c77e8ecb3e74c9a498996f46433b2d3d
+  - enabled: 1
+    path: Assets/Scenes/Menu/Menu.unity
+    guid: ad32202d766e459458ce3c6b81f4fc4e
+  - enabled: 1
     path: Assets/Scenes/Algoritmo/Fase2_Algo.unity
     guid: 047ba2dc934333645a9bcd9192dc1d62
   - enabled: 1
-    path: Assets/Scenes/Algoritmo/Fase3_Algo.unity
-    guid: b0871cc42b4f83f4bbbefd2b80ce05df
-  - enabled: 1
-    path: "Assets/Scenes/Decomposic\u0327a\u0303o/Fase2_Deco.unity"
-    guid: a8dcc30afdec4b44c8d04b0645adbc9f
-  - enabled: 1
-    path: "Assets/Scenes/Padra\u0303o/Fase1_Padrao.unity"
-    guid: 88f9ef670d1aa2f428d2698da15469b6
+    path: Assets/Scenes/Metro.unity
+    guid: cbfdf7e55f4d79c438f11b7c458a5e4d
   m_configObjects: {}
