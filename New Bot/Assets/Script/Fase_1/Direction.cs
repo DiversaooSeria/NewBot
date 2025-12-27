@@ -15,13 +15,15 @@ public class Direction : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private GameManager gameManager;
     private GameObject clonedObject;
     private GameObject anchoredPlaceholder;
-    private GameObject animObject; 
+    private GameObject animObject;
+
+    private Vector2 offset;
 
     public int direction;
 
     private void Awake()
     {
-        direction = directionData.directionValue;   
+        direction = directionData.directionValue;
         isAnchored = false;
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
@@ -44,6 +46,20 @@ public class Direction : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             clonedObject.GetComponent<RectTransform>().rotation = rectTransform.rotation;
             clonedObject.GetComponent<RectTransform>().localScale = rectTransform.localScale;
             clonedObject.name = this.gameObject.name;
+
+            var clonedRect = clonedObject.GetComponent<RectTransform>();
+            clonedRect.position = rectTransform.position;
+            clonedRect.rotation = rectTransform.rotation;
+            clonedRect.localScale = rectTransform.localScale;
+
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                canvas.transform as RectTransform,
+                eventData.position,
+                eventData.pressEventCamera,
+                out var localPointerPos
+            );
+
+            offset = clonedRect.anchoredPosition - localPointerPos;
         }
         else
         {
@@ -59,7 +75,14 @@ public class Direction : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvas.transform as RectTransform,
+            eventData.position,
+            eventData.pressEventCamera,
+            out var localPoint
+        );
+
+        rectTransform.anchoredPosition = localPoint + offset;
     }
 
     public void OnEndDrag(PointerEventData eventData)
