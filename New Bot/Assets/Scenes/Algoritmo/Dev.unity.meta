@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:New Bot/Assets/Scenes/Algoritmo/Dev.unity.meta
 guid: 1bb915857273bba46b8eef9a609a649b
+========
+guid: 167b2cd7eb4986641b3bc3b9338d539f
+folderAsset: yes
+>>>>>>>> 49fe795966afe793bce263d89c03ddc2d2871c48:New Bot/Assets/Script/Tutorial.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
