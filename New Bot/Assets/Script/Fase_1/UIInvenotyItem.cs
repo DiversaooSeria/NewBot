@@ -8,20 +8,15 @@ using UnityEngine.EventSystems;
 
 namespace Inventory.UI
 {
-
     public class UIInventoryItem : MonoBehaviour, IDropHandler
     {
-        private GameManager gameManager;
-
+        public GameManager gameManager;
         public GameObject anchoredGameObj;
-
-        private RectTransform rectTransform;
-
-        private CanvasGroup canvasGroup;
-
+        public RectTransform rectTransform;
+        public CanvasGroup canvasGroup;
         private UIInventoryPage inventoryPage;
-
         public int Index;
+
         private void Awake()
         {
             rectTransform = GetComponent<RectTransform>();
@@ -29,36 +24,52 @@ namespace Inventory.UI
             gameManager = FindObjectOfType<GameManager>();
             inventoryPage = FindObjectOfType<UIInventoryPage>();
         }
+
         public void OnDrop(PointerEventData eventData)
         {
-            if (eventData.pointerDrag != null && anchoredGameObj == null)
+            if (eventData.pointerDrag != null)
             {
-                anchoredGameObj = Instantiate(eventData.pointerDrag, this.gameObject.transform, true);
-                anchoredGameObj.GetComponent<RectTransform>().position = rectTransform.position;
-                anchoredGameObj.GetComponent<RectTransform>().rotation = rectTransform.rotation;
-                anchoredGameObj.GetComponent<RectTransform>().localScale = rectTransform.localScale;
-                anchoredGameObj.GetComponent<Direction>().Anchor(this.gameObject);
+                Directions draggedItem = eventData.pointerDrag.GetComponent<Directions>();
+                if (draggedItem == null) return;
 
-                int directionValue = anchoredGameObj.GetComponent<Direction>().direction;
+                draggedItem.dropWasSuccessful = true;
 
-                inventoryPage.InitializeInventoryUI(1);
+                if (anchoredGameObj == null)
+                {
+                    anchoredGameObj = Instantiate(eventData.pointerDrag, this.gameObject.transform, true);
 
-                gameManager.Numeros.Add(directionValue);
-            }
+                    anchoredGameObj.GetComponent<RectTransform>().position = rectTransform.position;
+                    anchoredGameObj.GetComponent<RectTransform>().rotation = rectTransform.rotation;
+                    anchoredGameObj.GetComponent<RectTransform>().localScale = rectTransform.localScale;
+                    Directions newDirScript = anchoredGameObj.GetComponent<Directions>();
+                    newDirScript.Anchor(this);
 
-            if (eventData.pointerDrag != null && anchoredGameObj != null)
-            {
-                Destroy(anchoredGameObj);
-                anchoredGameObj = Instantiate(eventData.pointerDrag, this.gameObject.transform, true);
-                anchoredGameObj.GetComponent<RectTransform>().position = rectTransform.position;
-                anchoredGameObj.GetComponent<RectTransform>().rotation = rectTransform.rotation;
-                anchoredGameObj.GetComponent<RectTransform>().localScale = rectTransform.localScale;
-                anchoredGameObj.GetComponent<Direction>().Anchor(this.gameObject);
+                    int directionValue = newDirScript.direction;
 
-                int directionValue = anchoredGameObj.GetComponent<Direction>().direction;
+                    int index = this.Index - 1;
+                    gameManager.Numeros.Insert(index, directionValue);
+                    if (this.Index == inventoryPage.count)
+                    {
+                        inventoryPage.InitializeInventoryUI(1);
+                    }
+                }
+                else
+                {
+                    Destroy(anchoredGameObj);
 
-                int index = this.Index - 1;
-                gameManager.Numeros[index] = directionValue;
+                    anchoredGameObj = Instantiate(eventData.pointerDrag, this.gameObject.transform, true);
+
+                    anchoredGameObj.GetComponent<RectTransform>().position = rectTransform.position;
+                    anchoredGameObj.GetComponent<RectTransform>().rotation = rectTransform.rotation;
+                    anchoredGameObj.GetComponent<RectTransform>().localScale = rectTransform.localScale;
+
+                    Directions newDirScript = anchoredGameObj.GetComponent<Directions>();
+                    newDirScript.Anchor(this);
+
+                    int directionValue = newDirScript.direction;
+                    int index = this.Index - 1;
+                    gameManager.Numeros[index] = directionValue;
+                }
             }
         }
     }
