@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void OnButtonClick()
+    public void OnButtonPlayClick()
     {
         player.StartCoroutine(Timer());
     }
