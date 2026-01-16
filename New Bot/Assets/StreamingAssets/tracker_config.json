@@ -1,0 +1,9 @@
+{
+  "offline": "true",
+  "format": "XAPI",
+  "actor": {
+    "objectType": "Agent",
+    "name": "Guilherme",
+    "mbox": "mailto:guilherme@example.com"
+  }
+}
