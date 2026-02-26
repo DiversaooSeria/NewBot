@@ -11,6 +11,9 @@ public class MoveSetPlayer : MonoBehaviour
     private GameObject Player;
     [SerializeField] private GameObject otherA;
     [SerializeField] private GameObject otherB;
+
+    public float addX = 14f;
+    public float addY = 4f;
     
 
 
@@ -39,7 +42,7 @@ public class MoveSetPlayer : MonoBehaviour
 
     private void OnClickButton()
     {
-        botaoMap.transform.position = new Vector2(Player.transform.position.x + 3.5f, Player.transform.position.y);
+        botaoMap.transform.position = new Vector2(Player.transform.position.x + addX, Player.transform.position.y+addY);
         if (botaoMap.activeInHierarchy)
         {
             botaoMap.SetActive(false);
