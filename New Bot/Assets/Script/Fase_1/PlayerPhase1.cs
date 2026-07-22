@@ -16,7 +16,7 @@ public class PlayerPhase1 : MonoBehaviour
     {   
         this.movementDirection = -5;
         this.gridSize = 0.5f;
-        GameManager gameManager = FindObjectOfType<GameManager>();
+        GameManager gameManager = FindFirstObjectByType<GameManager>();
         rb = GetComponent<Rigidbody2D>();
     }
 

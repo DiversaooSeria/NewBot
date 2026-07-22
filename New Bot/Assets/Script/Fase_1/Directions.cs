@@ -33,11 +33,11 @@ public class Directions : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         isAnchored = false;
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = FindFirstObjectByType<GameManager>();
 
         if (inventoryPage == null)
         {
-            inventoryPage = FindObjectOfType<UIInventoryPage>();
+            inventoryPage = FindFirstObjectByType<UIInventoryPage>();
         }
 
         animObject = GameObject.Find("Anim");
