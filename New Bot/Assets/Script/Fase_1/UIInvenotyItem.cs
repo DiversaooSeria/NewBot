@@ -21,8 +21,8 @@ namespace Inventory.UI
         {
             rectTransform = GetComponent<RectTransform>();
             canvasGroup = GetComponent<CanvasGroup>();
-            gameManager = FindObjectOfType<GameManager>();
-            inventoryPage = FindObjectOfType<UIInventoryPage>();
+            gameManager = FindFirstObjectByType<GameManager>();
+            inventoryPage = FindFirstObjectByType<UIInventoryPage>();
         }
 
         public void OnDrop(PointerEventData eventData)

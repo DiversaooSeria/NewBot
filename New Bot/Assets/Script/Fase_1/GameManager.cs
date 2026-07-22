@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        player = FindObjectOfType<PlayerPhase1>();
+        player = FindFirstObjectByType<PlayerPhase1>();
         string sceneName = SceneManager.GetActiveScene().name;
 
         if (tutorialPanelObj != null)

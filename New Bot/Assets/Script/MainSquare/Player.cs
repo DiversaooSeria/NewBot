@@ -1,40 +1,76 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
+    [SerializeField] private float moveSpeed = 5f;
 
-    public float moveSpeed;
     private Rigidbody2D rig;
-    private UnityEngine.Vector2 _playerDirection;
     private Animator animator;
+    private Vector2 playerDirection;
+    private bool canMove = true;
+
+    // Hashes dos parâmetros do Animator
+    private static readonly int MoveX = Animator.StringToHash("moveX");
+    private static readonly int MoveY = Animator.StringToHash("moveY");
+    private static readonly int IsMoving = Animator.StringToHash("isMoving");
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        
+        rig = GetComponent<Rigidbody2D>();
     }
-    void Start()
+
+    private void Update()
     {
-         rig = GetComponent<Rigidbody2D>();
+        if (!canMove)
+        {
+            playerDirection = Vector2.zero;
+            animator.SetBool(IsMoving, false);
+            return;
+        }
+
+        ReadInput();
+        UpdateAnimation();
     }
-    void Update()
+
+    private void FixedUpdate()
     {
-        _playerDirection = new UnityEngine.Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if(_playerDirection != Vector2.zero)
+        if (!canMove || playerDirection == Vector2.zero)
+            return;
+
+        rig.MovePosition(rig.position + playerDirection * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    private void ReadInput()
+    {
+        playerDirection = new Vector2(
+            Input.GetAxisRaw("Horizontal"),
+            Input.GetAxisRaw("Vertical")
+        );
+    }
+
+    private void UpdateAnimation()
+    {
+        animator.SetBool(IsMoving, playerDirection != Vector2.zero);
+
+        if (playerDirection != Vector2.zero)
         {
-            animator.SetFloat("moveX", _playerDirection.x);
-            animator.SetFloat("moveY", _playerDirection.y);
-            animator.SetBool("isMoving", true);
-            
-        }
-        else
-        {
-            animator.SetBool("isMoving", false);
+            animator.SetFloat(MoveX, playerDirection.x);
+            animator.SetFloat(MoveY, playerDirection.y);
         }
     }
-    void FixedUpdate(){
-        rig.MovePosition(rig.position + _playerDirection * moveSpeed * Time.fixedDeltaTime);
+
+    public void EnableMovement()
+    {
+        canMove = true;
+    }
+
+    public void DisableMovement()
+    {
+        canMove = false;
+        playerDirection = Vector2.zero;
+        animator.SetBool(IsMoving, false);
     }
 }
