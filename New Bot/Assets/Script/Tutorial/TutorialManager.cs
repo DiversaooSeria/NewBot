@@ -13,6 +13,9 @@ public class TutorialManager : MonoBehaviour
     [TextArea]
     [SerializeField] private List<string> tutorialMessages = new();
 
+    [Header("Tutorial Animation")]
+    [SerializeField] private GameObject fingerTutorial;
+
     [Header("References")]
     [SerializeField] private Player player;
 
@@ -85,6 +88,7 @@ public class TutorialManager : MonoBehaviour
         {
             tutorialText.text = tutorialMessages[currentMessageIndex];
         }
+        PlayTutorialAnimation();
     }
 
     private void EndTutorial()
@@ -94,5 +98,21 @@ public class TutorialManager : MonoBehaviour
         player?.EnableMovement();
 
         Destroy(gameObject);
+        StopTutorialAnimation();
+    }
+    private void PlayTutorialAnimation()
+    {
+        if (fingerTutorial != null)
+        {
+            fingerTutorial.SetActive(true);
+        }
+    }
+
+    private void StopTutorialAnimation()
+    {
+        if (fingerTutorial != null)
+        {
+            fingerTutorial.SetActive(false);
+        }
     }
 }
