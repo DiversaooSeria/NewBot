@@ -11,7 +11,13 @@ public class MoveSetPlayer : MonoBehaviour
     private GameObject Player;
     [SerializeField] private GameObject otherA;
     [SerializeField] private GameObject otherB;
-    
+
+    [SerializeField] private GameObject barco;
+    public Sprite ImagemBarco;
+
+    public GameObject ObjetosColidiveis;
+    public bool PularObstaculos;
+
 
 
     private void Awake()
@@ -39,16 +45,28 @@ public class MoveSetPlayer : MonoBehaviour
 
     private void OnClickButton()
     {
-        botaoMap.transform.position = new Vector2(Player.transform.position.x + 3.5f, Player.transform.position.y);
+        botaoMap.transform.position = new Vector2(Player.transform.position.x + 3.5f, Player.transform.position.y+0.3f);
         if (botaoMap.activeInHierarchy)
         {
             botaoMap.SetActive(false);
+            ObjetosColidiveis.GetComponent<TilemapCollider2D>().isTrigger = false;
         }
         else
         {
             botaoMap.SetActive(true);
             otherA.SetActive(false);
             otherB.SetActive(false);
+
+            barco.GetComponent<SpriteRenderer>().sprite = ImagemBarco;
+            if(PularObstaculos)
+            {
+                ObjetosColidiveis.GetComponent<TilemapCollider2D>().isTrigger = true;
+            }
+            else
+            {
+                ObjetosColidiveis.GetComponent<TilemapCollider2D>().isTrigger = false;
+            }
+            
 
         }
     }
